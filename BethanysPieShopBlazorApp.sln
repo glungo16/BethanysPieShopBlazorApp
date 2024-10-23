@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BethanysPieShopBlazorApp", "BethanysPieShopBlazorApp\BethanysPieShopBlazorApp.csproj", "{A00CDA77-98F4-4E38-85A9-FB0B4C5F0BDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BethanysPieShopBlazorApp", "BethanysPieShopBlazorApp\BethanysPieShopBlazorApp.csproj", "{A00CDA77-98F4-4E38-85A9-FB0B4C5F0BDC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BethanysPieShopHRM.Shared", "BethanysPieShopHRM.Shared\BethanysPieShopHRM.Shared.csproj", "{B55E5F5A-F8DE-484F-BDC3-9E353F9370A2}"
 EndProject
