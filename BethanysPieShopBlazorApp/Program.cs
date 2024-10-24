@@ -1,4 +1,7 @@
 using BethanysPieShopBlazorApp;
+using BethanysPieShopBlazorApp.Services;
+using BethanysPieShopBlazorApp.State;
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -11,5 +14,12 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 // added services with dependency injection
 //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+builder.Services.AddHttpClient<IEmployeeDataService, EmployeeDataService>(
+    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+
+builder.Services.AddScoped<ApplicationState>();
+
+builder.Services.AddBlazoredLocalStorage();
 
 await builder.Build().RunAsync();

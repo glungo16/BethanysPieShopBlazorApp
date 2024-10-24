@@ -1,0 +1,6 @@
+# @BethanysPieShopBlazorApi_HostAddress = http://localhost:5051
+
+# GET {{BethanysPieShopBlazorApi_HostAddress}}/weatherforecast/
+# Accept: application/json
+
+###

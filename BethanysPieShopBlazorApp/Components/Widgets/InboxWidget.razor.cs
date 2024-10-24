@@ -1,12 +1,18 @@
-﻿namespace BethanysPieShopBlazorApp.Components.Widgets
+﻿using BethanysPieShopBlazorApp.State;
+using Microsoft.AspNetCore.Components;
+
+namespace BethanysPieShopBlazorApp.Components.Widgets
 {
     public partial class InboxWidget
     {
+        [Inject]
+        ApplicationState ApplicationState { get; set; }
+
         public int MessageCount { get; set; } = 0;
 
         protected override void OnInitialized()
         {
-            MessageCount = new Random().Next(10);
+            MessageCount = ApplicationState.NumberOfMessages;
         }
     }
 }
