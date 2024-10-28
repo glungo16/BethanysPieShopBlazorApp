@@ -51,8 +51,11 @@ namespace BethanysPieShopBlazorApi.Models
                 foundEmployee.Comment = employee.Comment;
                 foundEmployee.ExitDate = employee.ExitDate;
                 foundEmployee.JoinedDate = employee.JoinedDate;
-                //foundEmployee.ImageContent = employee.ImageContent;
-                //foundEmployee.ImageName = employee.ImageName;
+                foundEmployee.Longitude = employee.Longitude;
+                foundEmployee.Latitude = employee.Latitude;
+                foundEmployee.ImageContent = employee.ImageContent;
+                foundEmployee.ImageName = employee.ImageName;
+                foundEmployee.ImagePath = employee.ImagePath;
 
                 _appDbContext.SaveChanges();
 

@@ -1,21 +1,25 @@
 ﻿using BethanysPieShopBlazorApi.Models;
 using BethanysPieShopHRM.Shared.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BethanysPieShopBlazorApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
-        //private readonly IWebHostEnvironment _webHostEnvironment;
-        //private readonly IHttpContextAccessor _httpContextAccessor;
-        public EmployeeController(IEmployeeRepository employeeRepository)//, IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor)
+
+        // these two are for handling reading an image from an api
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public EmployeeController(IEmployeeRepository employeeRepository, IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor)
         {
             _employeeRepository = employeeRepository;
-            //_webHostEnvironment = webHostEnvironment;
-            //_httpContextAccessor = httpContextAccessor;
+            _webHostEnvironment = webHostEnvironment;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -44,14 +48,16 @@ namespace BethanysPieShopBlazorApi.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            //handle image upload
-            //string currentUrl = _httpContextAccessor.HttpContext.Request.Host.Value;
-            //var path = $"{_webHostEnvironment.WebRootPath}\\uploads\\{employee.ImageName}";
-            //var fileStream = System.IO.File.Create(path);
-            //fileStream.Write(employee.ImageContent, 0, employee.ImageContent.Length);
-            //fileStream.Close();
+            if (employee.ImageContent != null)
+            {
+                string currentUrl = _httpContextAccessor.HttpContext.Request.Host.Value;
+                var path = $"{_webHostEnvironment.WebRootPath}\\uploads\\{employee.ImageName}";
+                var fileStream = System.IO.File.Create(path);
+                fileStream.Write(employee.ImageContent, 0, employee.ImageContent.Length);
+                fileStream.Close();
 
-           // employee.ImageName = $"https://{currentUrl}/uploads/{employee.ImageName}";
+                employee.ImagePath = $"https://{currentUrl}/uploads/{employee.ImageName}";
+            }
 
             var createdEmployee = _employeeRepository.AddEmployee(employee);
 
@@ -72,10 +78,26 @@ namespace BethanysPieShopBlazorApi.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+
+
+
             var employeeToUpdate = _employeeRepository.GetEmployeeById(employee.EmployeeId);
 
             if (employeeToUpdate == null)
                 return NotFound();
+
+            //handle image upload (store image on the server)
+            if (employee.ImageContent != null)
+            {
+                string currentUrl = _httpContextAccessor.HttpContext.Request.Host.Value;
+                var path = $"{_webHostEnvironment.WebRootPath}\\uploads\\{employee.ImageName}";
+                var fileStream = System.IO.File.Create(path);
+                fileStream.Write(employee.ImageContent, 0, employee.ImageContent.Length);
+                fileStream.Close();
+
+                employee.ImagePath = $"https://{currentUrl}/uploads/{employee.ImageName}";
+            }
+            
 
             _employeeRepository.UpdateEmployee(employee);
 

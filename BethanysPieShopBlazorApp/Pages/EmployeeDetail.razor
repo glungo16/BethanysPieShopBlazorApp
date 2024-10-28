@@ -6,7 +6,8 @@
     <br />
     <div class="col-12 row">
         <div class="col-2 text-center">
-            <img src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{Employee.EmployeeId}.jpg")" class="img-fluid rounded-circle employee-detail-img" />
+            @* <img src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{Employee.EmployeeId}.jpg")" class="employee-img rounded-circle img-fluid" /> *@
+            <img src="@Employee.ImagePath" class="employee-img rounded-circle img-fluid" />
         </div>
         <div class="col-10 row">
             <div class="col-12 col-xxl-8">
@@ -110,6 +111,7 @@
                 </div>
             </div>
             <div class="col-12 col-xxl-4">
+                <Map Zoom="10" Markers="MapMarkers"></Map>
             </div>
         </div>
     </div>

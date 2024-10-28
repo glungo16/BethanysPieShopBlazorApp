@@ -1,4 +1,4 @@
-﻿namespace BethanysPieShopHRM.App.Helper
+﻿namespace BethanysPieShopBlazorApp.Helper
 {
     public class LocalStorageConstants
     {
