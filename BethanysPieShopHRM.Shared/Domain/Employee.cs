@@ -34,6 +34,7 @@ namespace BethanysPieShopHRM.Shared.Domain
 
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
+        public List<TimeRegistration> TimeRegistrations { get; set; }
 
         [NotMapped]
         public byte[]? ImageContent { get; set; } // so that image is not stored in database; it is stored in the file system

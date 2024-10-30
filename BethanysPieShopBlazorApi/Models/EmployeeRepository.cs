@@ -1,11 +1,39 @@
 ﻿using BethanysPieShopHRM.Shared.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace BethanysPieShopBlazorApi.Models
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository//, IDisposable
     {
+
+
+        //private readonly IDbContextFactory<AppDbContext> _contextFactory;
+
+        //public EmployeeRepository(IDbContextFactory<AppDbContext> contextFactory)
+        //{
+        //    _contextFactory = contextFactory;
+        //}
+
+        //public async Task RunBackgroundTaskAsync()
+        //{
+        //    using var context = _contextFactory.CreateDbContext();
+        //    // Perform database operations
+        //    var products = await context.Products.ToListAsync();
+        //}
+
+
         private readonly AppDbContext _appDbContext;
         private Random random = new Random();
+
+        //public EmployeeRepository(IDbContextFactory<AppDbContext> contextFactory)
+        //{
+        //    _appDbContext = contextFactory.CreateDbContext();
+        //}
+
+        //public void Dispose()
+        //{
+        //    _appDbContext.Dispose();
+        //}
 
         public EmployeeRepository(AppDbContext appDbContext)
         {
@@ -73,5 +101,7 @@ namespace BethanysPieShopBlazorApi.Models
             _appDbContext.Employees.Remove(foundEmployee);
             _appDbContext.SaveChanges();
         }
+
+        
     }
 }

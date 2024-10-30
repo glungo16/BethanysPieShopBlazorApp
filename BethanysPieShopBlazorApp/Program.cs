@@ -24,6 +24,8 @@ builder.Services.AddHttpClient<ICountryDataService, CountryDataService>(client =
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)).AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 builder.Services.AddHttpClient<IJobCategoryDataService, JobCategoryDataService>(client => 
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)).AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+builder.Services.AddHttpClient<ITimeRegistrationDataService, TimeRegistrationDataService>(client =>
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)).AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
 builder.Services.AddScoped<ApplicationState>();
 

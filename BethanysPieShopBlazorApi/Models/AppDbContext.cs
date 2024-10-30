@@ -13,6 +13,7 @@ namespace BethanysPieShopBlazorApi.Models
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<JobCategory> JobCategories { get; set; }
+        public DbSet<TimeRegistration> TimeRegistrations { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -62,6 +63,20 @@ namespace BethanysPieShopBlazorApi.Models
                 Latitude = 50.8503, 
                 Longitude = 4.3517
             });
+
+            var random = new Random();
+
+            for (int i = 1; i <= 1000; i++)
+            {
+                modelBuilder.Entity<TimeRegistration>().HasData(new TimeRegistration()
+                {
+                    TimeRegistrationId = i,
+                    EmployeeId = 1,
+                    StartTime = new DateTime(2024, 1, 1).AddDays(random.Next(365)).AddHours(random.Next(0, 24)).AddMinutes(random.Next(0, 60)).AddSeconds(random.Next(0, 60)),
+                    EndTime = new DateTime(2024, 1, 1).AddDays(random.Next(365)).AddHours(random.Next(0, 24)).AddMinutes(random.Next(0, 60)).AddSeconds(random.Next(0, 60)),
+                    PerformedTaskDescription = $"Task {i}"
+                });
+            }
         }
     }
 }

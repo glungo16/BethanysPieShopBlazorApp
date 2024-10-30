@@ -26,7 +26,10 @@ namespace BethanysPieShopBlazorApp.Pages
         [Inject]
         public IEmployeeDataService? EmployeeDataService { get; set; }
 
+        
+
         public List<Employee> Employees { get; set; } = default!;
+        
 
         private Employee? _selectedEmployee;
 

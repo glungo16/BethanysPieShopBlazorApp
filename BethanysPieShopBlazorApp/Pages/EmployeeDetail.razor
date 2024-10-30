@@ -1,5 +1,6 @@
 ﻿@page "/employeedetail/{EmployeeId}"
 
+@using Microsoft.AspNetCore.Components.QuickGrid
 
 <section class="employee-detail">
     <h1 class="page-title">Details for @Employee.FirstName @Employee.LastName</h1>
@@ -115,4 +116,88 @@
             </div>
         </div>
     </div>
+
+     <h2>Time registrations</h2>
+        @* @if (TimeRegistrations.Count == 0)
+    {
+    <p><em>Loading time registrations...</em></p>
+    }
+    else
+    {
+    <div class="virtualized">
+    <table class="table">
+    <thead>
+    <tr>
+    <th>ID</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th>Task</th>
+    </tr>
+    </thead>
+    <tbody>
+    <Virtualize Items="TimeRegistrations" Context="context">
+    <tr>
+    <td>@context.TimeRegistrationId</td>
+    <td>@context.StartTime</td>
+    <td>@context.EndTime</td>
+    <td>@context.PerformedTaskDescription</td>
+    </tr>
+
+    </Virtualize>
+    </tbody>
+    </table>
+    </div>
+    } *@
+
+
+        @* <div class="virtualized">
+    <table class="table">
+    <thead>
+    <tr>
+    <th>ID</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th>Task</th>
+    </tr>
+    </thead>
+    <tbody>
+    <Virtualize ItemsProvider="LoadTimeRegistrations" ItemSize="itemHeight">
+    <ItemContent>
+    <tr>
+    <td>@context.TimeRegistrationId</td>
+    <td>@context.StartTime</td>
+    <td>@context.EndTime</td>
+    <td>@context.PerformedTaskDescription</td>
+    </tr>
+    </ItemContent>
+    <Placeholder>
+    <tr>
+    <td>Loading...</td>
+    <td>Loading...</td>
+    <td>Loading...</td>
+    <td>Loading...</td>
+    </tr>
+    </Placeholder>
+    </Virtualize>
+    </tbody>
+    </table>
+    </div> *@
+
+    @if (queryableCount > 0)
+    {
+
+        <QuickGrid Items="@itemsQueryable" Pagination="@pagination">
+            <PropertyColumn Property="@(p => p.TimeRegistrationId)" IsDefaultSortColumn="true" Title="ID" Sortable="true">
+            </PropertyColumn>
+            <PropertyColumn Property="@(e => e.StartTime)" Title="Start time" Sortable="true" />
+            <PropertyColumn Property="@(e => e.EndTime)" Title="End time" Sortable="true" />
+            <PropertyColumn Property="@(e => e.PerformedTaskDescription)" Title="Task" Align="Align.Left" />
+        </QuickGrid>
+
+        <Paginator State="@pagination" />
+    }
+    else
+    {
+        <p>No time registrations found.</p>
+    }
 </section>

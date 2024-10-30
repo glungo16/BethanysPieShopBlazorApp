@@ -5,7 +5,19 @@ using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
+
+// if working with interactive server mode, it's better to use addDbContextFactory
+// with AddDbContext, the dbContext would be shared across the server and components
+// which can cause problems
+// Microsoft therefore recommends just newing up the DbContext whenever you need it or alternatively, and that's what I'm going to do, use the DbContextFactory, which we can then inject
+
+builder.Services.AddDbContextFactory<AppDbContext>(options =>
+{
+    options.UseSqlServer(
+        builder.Configuration["ConnectionStrings:DefaultConnection"]);
+});
 
 builder.Services.AddDbContext<AppDbContext>(options => {
     options.UseSqlServer(
@@ -15,6 +27,7 @@ builder.Services.AddDbContext<AppDbContext>(options => {
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IJobCategoryRepository, JobCategoryRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<ITimeRegistrationRepository, TimeRegistrationRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

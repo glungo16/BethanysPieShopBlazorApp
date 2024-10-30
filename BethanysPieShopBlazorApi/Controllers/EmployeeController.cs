@@ -15,6 +15,9 @@ namespace BethanysPieShopBlazorApi.Controllers
         // these two are for handling reading an image from an api
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IHttpContextAccessor _httpContextAccessor;
+
+
+
         public EmployeeController(IEmployeeRepository employeeRepository, IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor)
         {
             _employeeRepository = employeeRepository;
